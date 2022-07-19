@@ -1,0 +1,5 @@
+../data/cityscapes/leftImg8bit/train/ulm/ulm_000048_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/ulm/ulm_000048_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/stuttgart/stuttgart_000001_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/stuttgart/stuttgart_000001_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/erfurt/erfurt_000057_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/erfurt/erfurt_000057_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/darmstadt/darmstadt_000066_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/darmstadt/darmstadt_000066_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/hanover/hanover_000000_020089_leftImg8bit.png	../data/cityscapes/gtFine/train/hanover/hanover_000000_020089_gtFine_labelIds.png

@@ -1,0 +1,1 @@
+../data/cityscapes/leftImg8bit/train/stuttgart/stuttgart_000001_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/stuttgart/stuttgart_000001_000019_gtFine_labelIds.png

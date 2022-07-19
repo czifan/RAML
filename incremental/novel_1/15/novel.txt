@@ -1,0 +1,1 @@
+../data/cityscapes/leftImg8bit/train/hamburg/hamburg_000000_071150_leftImg8bit.png	../data/cityscapes/gtFine/train/hamburg/hamburg_000000_071150_gtFine_labelIds.png

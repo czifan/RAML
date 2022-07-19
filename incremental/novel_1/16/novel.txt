@@ -1,0 +1,5 @@
+../data/cityscapes/leftImg8bit/train/zurich/zurich_000015_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/zurich/zurich_000015_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/zurich/zurich_000044_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/zurich/zurich_000044_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/zurich/zurich_000059_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/zurich/zurich_000059_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/zurich/zurich_000041_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/zurich/zurich_000041_000019_gtFine_labelIds.png
+../data/cityscapes/leftImg8bit/train/erfurt/erfurt_000066_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/erfurt/erfurt_000066_000019_gtFine_labelIds.png

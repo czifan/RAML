@@ -1,0 +1,1 @@
+../data/cityscapes/leftImg8bit/train/bremen/bremen_000225_000019_leftImg8bit.png	../data/cityscapes/gtFine/train/bremen/bremen_000225_000019_gtFine_labelIds.png
