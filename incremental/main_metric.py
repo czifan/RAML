@@ -344,47 +344,6 @@ def cosine_similarity(x,y):
 
 from copy import deepcopy
 
-def align_embedding(opts, model, metric_model, train_loader, device, center_embedding, tag=None):
-    model.eval()
-    metric_model.eval()
-    remain_class = 19 - len(Cityscapes.unknown_target)
-    num = {key: 1 for key in center_embedding.keys()}
-    for batch_idx, (images, labels, labels_true, _, _) in tqdm(enumerate(train_loader)):
-        with torch.no_grad():
-            images = images.to(device, dtype=torch.float32)[0:1]
-            labels = labels.to(device, dtype=torch.long)[0:1]
-            labels_true = labels_true.to(device, dtype=torch.long)[0:1]
-            assert images.shape[0] == 1
-
-            outputs, logits, features, _ = model(images) # outputs: (1, 16, H, W), logits: (1, 20, H, W), features: (1, 256, H/4, W/4)
-            logits = F.interpolate(logits, size=features.shape[-2:], mode='bilinear', align_corners=False) # (1, 20, H/4, W/4)
-            features = features[0].detach().cpu().numpy() # (256, H/4, W/4)
-            outputs = torch.argmax(outputs, dim=1)[0].detach().cpu().numpy() # (H, W)
-
-            logits = logits[0].detach().cpu().numpy() # (20, H/4, W/4)
-            logits = logits[remain_class:] # (3, H/4, W/4)
-            logits, region, connect = concat_logits(logits,250,erode=True,tag=tag)
-
-            for k in region:
-                mask = (connect == k)[np.newaxis, ...].astype(np.uint8) # (1, H/4, W/4)
-                embedding = (features * mask).reshape(features.shape[0], -1).sum(axis=-1) # (256,)
-                embedding = embedding / np.sum(mask)
-                embedding = torch.Tensor(embedding).unsqueeze(dim=0).to(device, dtype=torch.float32) # (1, 256)
-                embedding = metric_model.forward_feature(embedding)[0].cpu().detach().numpy() # (128,)
-                tmp_key, tmp_cos, tmp_emb = None, None, None
-                for key, value in center_embedding.items():
-                    cos = cosine_similarity(embedding, value)
-                    if  cos >= 0.9:
-                        if tmp_cos is None or cos > tmp_cos:
-                            tmp_key = key
-                            tmp_cos = cos 
-                            tmp_emb = embedding
-                if tmp_key is not None:
-                    center_embedding[tmp_key] += tmp_emb
-                    num[tmp_key] += 1
-            # if batch_idx > 50: break 
-    center_embedding = {key: value / num[key] for key, value in center_embedding.items()}
-    return center_embedding
 def concat_logits(logits, thereshold=100, erode=True, tag=None):
     if (isinstance(tag,list)):
         mask = np.array(tag)
@@ -526,7 +485,6 @@ def val(opts, model, metric_model, train_loader, val_loader, device,):
     #using when 16+1 setting
     #center_embedding = generate_novel(opts.novel_dir, [13], model, metric_model, device) # {13: (128,), 14: (128,), 15: (128,)}
     
-    #center_embedding = align_embedding(opts, model, metric_model, train_loader, device, center_embedding)
     name=['sky','person','rider','car','truck','bus','train','motorcycle','bicycle']
     meta_channel_num=20-remain_class
     all_tag=[0]*meta_channel_num
@@ -551,10 +509,6 @@ def val(opts, model, metric_model, train_loader, val_loader, device,):
     '''
     #all_tag = np.array(all_tag)
     print(all_tag)
-    '''
-    if (opts.test_only):
-        center_embedding = align_embedding(opts ,model, metric_model, train_loader, device, center_embedding, all_tag)
-    '''
     miou_all=[]
     miou_unknown=[]
     for _, (images, labels, labels_true, _, _) in tqdm(enumerate(val_loader)):
