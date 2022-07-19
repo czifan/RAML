@@ -8,6 +8,8 @@ This is an official pytorch implementation of *Region-Aware Metric Learning for 
 ### Dataset
 We follow [DMLNet](https://github.com/Jun-CEN/Open-World-Semantic-Segmentation) to prepare datasets.
 
+Note: For different Settings, you need to manually modify lines 71 through 82 in datasets/cityscapes.py.
+
 ### Pretrained model
 The pretrained models can be downloaded from [Google Drive](https://drive.google.com/file/d/1GYKxToN3YzKSmx9RsDCW8A0QWFU9liZ8/view?usp=sharing) or [Baidu Drive](https://pan.baidu.com/s/1dza_9Fr75wEKX_mmncvofA) (code: 63z1). Put four folders into RAML/incremental/.
 
