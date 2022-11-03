@@ -37,7 +37,7 @@ For 16+3 5-shots:
 ```
 python main_metric.py --ckpt ./output_stage3_16/final.pth --test_only --test_mode 16_3  --novel_dir ./novel
 ```
-For 16+1 5-shots:
+For 16+3 1-shots:
 ```
 python main_metric.py --ckpt ./output_stage3_16/final.pth --test_only --test_mode 16_3  --novel_dir ./novel_1
 ```
